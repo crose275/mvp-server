@@ -16,7 +16,7 @@ function runSeeder(pool, callback){
             // only INSERT new rows if the table is currently empty
             if (data.rows[0]['count'] == 0){
                 pool.query(`
-                INSERT INTO categories (id, name)
+                INSERT INTO categories (name)
                 VALUES 
                 ('Home'),
                 ('Personal'),
@@ -31,7 +31,7 @@ function runSeeder(pool, callback){
                     }
                 });
             } else {
-                console.log("Did not seed new data because Table was not empty");
+                console.log("Did not seed new data because categories Table was not empty");
             }
             pool.query(`SELECT * FROM tasks`, (err, data)=>{
                 console.log(data.rows[0]['count'])
@@ -54,7 +54,7 @@ function runSeeder(pool, callback){
                         }
                     });
                 } else {
-                    console.log("Did not seed new data because Table was not empty");
+                    console.log("Did not seed new data because tasks Table was not empty");
                 }
                 })
             
