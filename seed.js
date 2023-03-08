@@ -11,7 +11,7 @@ function runSeeder(pool, callback){
             return done();
         }
         // run seed SQL
-        pool.query(`SELECT COUNT(*) FROM tasks`, (err, data) => {
+        pool.query(`SELECT COUNT(*) FROM categories`, (err, data) => {
             console.log("number of existing rows: ", data.rows[0]['count']);
             // only INSERT new rows if the table is currently empty
             if (data.rows[0]['count'] == 0){
@@ -21,25 +21,43 @@ function runSeeder(pool, callback){
                 ('Home'),
                 ('Personal'),
                 ('School'),
-                ('Work');
-
-                INSERT INTO tasks (name, date_added, date_due, category_id, completed) VALUES 
-                ('Complete Homework', '03-07-2023', '03-10-2023', 3, false),
-                ('Mow Lawn', '03-07-2023', '03-10-2023', 1, false),
-                ('Feed Snakes', '03-07-2023', '03-10-2023', 2,  false)
-                ('Send Email', '03-07-2023', '03-10-2023', 4, false)
-                ('Go Grocery Shopping', '03-07-2023', '03-10-2023', 1, false)`, 
+                ('Work');`, 
                 (err, data) => {
                     if (err){
-                        console.log("Insert failed");
+                        console.log("Categories insert failed");
                         console.error(err)
                     } else {
-                        console.log("Seeding complete");
+                        console.log("Categories Seeding complete");
                     }
                 });
             } else {
                 console.log("Did not seed new data because Table was not empty");
             }
+            pool.query(`SELECT * FROM tasks`, (err, data)=>{
+                console.log(data.rows[0]['count'])
+                if(data.rows[0]['count'] == 0){
+                    pool.query(`
+                    INSERT INTO tasks 
+                    (name, date_added, date_due, category_id, completed) 
+                    VALUES 
+                    ('Complete Homework', '03-07-2023', '03-10-2023', 3, false),
+                    ('Mow Lawn', '03-07-2023', '03-10-2023', 1, false),
+                    ('Feed Snakes', '03-07-2023', '03-10-2023', 2,  false)
+                    ('Send Email', '03-07-2023', '03-10-2023', 4, false)
+                    ('Go Grocery Shopping', '03-07-2023', '03-10-2023', 1, false)`, 
+                    (err, data) => {
+                        if (err){
+                            console.log("Insert failed");
+                            console.error(err)
+                        } else {
+                            console.log("Seeding complete");
+                        }
+                    });
+                } else {
+                    console.log("Did not seed new data because Table was not empty");
+                }
+                })
+            
             // tell pg we are done with this connection, then execute callback to close it
             done();
             callback();
