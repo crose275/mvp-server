@@ -37,13 +37,12 @@ function runSeeder(pool, callback){
                 console.log("number of existing rows ", data.rows[0]['count'])
                 if(data.rows[0]['count'] == 0){
                     pool.query(`
-                    INSERT INTO tasks 
-                    (name, date_added, date_due, category_id, completed) 
+                    INSERT INTO tasks ( name, date_added, date_due, category_id, completed ) 
                     VALUES 
                     ('Complete Homework', '03-07-2023', '03-10-2023', 3, false),
                     ('Mow Lawn', '03-07-2023', '03-10-2023', 1, false),
-                    ('Feed Snakes', '03-07-2023', '03-10-2023', 2,  false)
-                    ('Send Email', '03-07-2023', '03-10-2023', 4, false)
+                    ('Feed Snakes', '03-07-2023', '03-10-2023', 2,  false),
+                    ('Send Email', '03-07-2023', '03-10-2023', 4, false),
                     ('Go Grocery Shopping', '03-07-2023', '03-10-2023', 1, false)`, 
                     (err, data) => {
                         if (err){
