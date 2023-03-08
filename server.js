@@ -35,9 +35,6 @@ app.get('/categories', (req, res, next)=>{
 
 // get request to show one id of a table
 app.get('/:table/:id', (req, res, next)=>{
-    if(err){
-        return next(err)
-    }
     const table = req.params.table
     const id = Number.parseInt(req.params.id)
     if(table === "tasks"){
@@ -71,6 +68,8 @@ app.get('/:table/:id', (req, res, next)=>{
         res.status(404).send("No tables with that name")
     }
 })
+
+app.post()
 
 app.listen(port, ()=>{
     console.log("listening on port ", port)
