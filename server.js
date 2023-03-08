@@ -69,7 +69,7 @@ app.get('/:table/:id', (req, res, next)=>{
     }
 })
 
-app.post()
+
 
 app.listen(port, ()=>{
     console.log("listening on port ", port)
