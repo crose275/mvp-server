@@ -67,5 +67,5 @@ function runSeeder(pool, callback){
 
 runSeeder(pool, () => {
     // seeding is done, so we can close the pool
-    pool.end();
+    // pool.end();
 })
