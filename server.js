@@ -33,6 +33,45 @@ app.get('/categories', (req, res, next)=>{
     })
 })
 
+// get request to show one id of a table
+app.get('/:table/:id', (req, res, next)=>{
+    if(err){
+        return next(err)
+    }
+    const table = req.params.table
+    const id = Number.parseInt(req.params.id)
+    if(table === "tasks"){
+        // pool query to tasks table where id matches request id
+        pool.query('SELECT * FROM tasks WHERE id = $1', [id], (err, result)=>{
+            if(err){
+                return next(err)
+            }
+            const tasks = result.rows[0];
+            if(tasks){
+                res.send(tasks)
+            } else{
+                res.status(404).send("No tasks found with that id")
+            }
+        })
+    } else if(table === "categories"){
+        //pool query to categories table where id matches request id
+        pool.query('SELECT * FROM categories WHERE id = $1', [id], (err, result)=>{
+            if(err){
+                return next(err)
+            }
+            const categories = result.rows[0];
+            if(categories){
+                res.send(categories)
+            } else {
+                res.status(404).send("No categories found with that id")
+            }
+        })
+    } else{
+        //send response that there is no data to return
+        res.status(404).send("No tables with that name")
+    }
+})
+
 app.listen(port, ()=>{
     console.log("listening on port ", port)
     console.log("connecting to postgres pool: ", pool)
