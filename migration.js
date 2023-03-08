@@ -12,12 +12,17 @@ function runMigrations(pool, callback) {
     }
     //run migration SQL
     pool.query(
-      `CREATE TABLE IF NOT EXISTS tasks (
+      `CREATE TABLE IF NOT EXISTS categories(
+        id serial PRIMARY KEY,
+        name VARCHAR(50)
+      );
+
+      CREATE TABLE IF NOT EXISTS tasks (
             id serial PRIMARY KEY,
             name VARCHAR(150),
             date_added date, 
             date_due date,
-            category_id integer FOREIGN KEY,
+            category_id integer references categories(id),
             completed boolean);`, (err, data) => {
                 if(err){
                     console.log("CREATE TABLE tasks failed");
