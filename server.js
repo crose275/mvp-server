@@ -12,7 +12,7 @@ const dbConn = require('./dbConn');
 const pool = dbConn.getPool();
 
 app.get('/tasks', (req, res, next)=>{
-    pool.query('SELECT * FROM pets', (err, result)=> {
+    pool.query('SELECT * FROM tasks', (err, result)=> {
         if(err) {
             return next(err);
         }

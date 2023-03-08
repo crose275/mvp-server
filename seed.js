@@ -15,7 +15,8 @@ function runSeeder(pool, callback){
             console.log("number of existing rows: ", data.rows[0]['count']);
             // only INSERT new rows if the table is currently empty
             if (data.rows[0]['count'] == 0){
-                pool.query(`INSERT INTO categories (name)
+                pool.query(`
+                INSERT INTO categories (id, name)
                 VALUES 
                 ('Home'),
                 ('Personal'),
