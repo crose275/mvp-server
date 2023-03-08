@@ -17,7 +17,7 @@ function runMigrations(pool, callback) {
             name VARCHAR(150),
             date_added date, 
             date_due date,
-            category_id integer FOREIGN KEY
+            category_id integer FOREIGN KEY,
             completed boolean);`, (err, data) => {
                 if(err){
                     console.log("CREATE TABLE tasks failed");
