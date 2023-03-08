@@ -18,16 +18,11 @@ function runMigrations(pool, callback) {
             date_added date, 
             date_due date,
             category_id integer FOREIGN KEY
-            completed boolean);
-
-            CREATE TABLE IF NOT EXISTS categories (
-                id serial PRIMARY KEY,
-                name VARCHAR(50)
-            )`, (err, data) => {
+            completed boolean);`, (err, data) => {
                 if(err){
-                    console.log("CREATE TABLE failed");
+                    console.log("CREATE TABLE tasks failed");
                 } else {
-                    console.log("Tables created successfully");
+                    console.log("Tasks table created successfully");
                 }
 
                 done();
