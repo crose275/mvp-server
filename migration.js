@@ -21,6 +21,7 @@ function runMigrations(pool, callback) {
             completed boolean);`, (err, data) => {
                 if(err){
                     console.log("CREATE TABLE tasks failed");
+                    console.err(err)
                 } else {
                     console.log("Tasks table created successfully");
                 }
