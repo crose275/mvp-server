@@ -22,6 +22,17 @@ app.get('/tasks', (req, res, next)=>{
     })
 })
 
+app.get('/categories', (req, res, next)=>{
+    pool.query('SELECT * FROM categories', (err, result)=> {
+        if(err) {
+            return next(err);
+        }
+
+        const rows = result.rows
+        return res.send(rows)
+    })
+})
+
 app.listen(port, ()=>{
     console.log("listening on port ", port)
     console.log("connecting to postgres pool: ", pool)
