@@ -33,8 +33,8 @@ function runSeeder(pool, callback){
             } else {
                 console.log("Did not seed new data because categories Table was not empty");
             }
-            pool.query(`SELECT * FROM tasks`, (err, data)=>{
-                console.log(data.rows[0]['count'])
+            pool.query(`SELECT COUNT(*) FROM tasks`, (err, data)=> {
+                console.log("number of existing rows ", data.rows[0]['count'])
                 if(data.rows[0]['count'] == 0){
                     pool.query(`
                     INSERT INTO tasks 
