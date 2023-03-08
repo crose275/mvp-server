@@ -1,5 +1,5 @@
 const { Pool } = require('pg');
-const dbConn = require('./dbconn')
+const dbConn = require('./dbConn')
 
 const pool = dbConn.getPool();
 
