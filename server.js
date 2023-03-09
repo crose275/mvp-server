@@ -68,8 +68,37 @@ app.get('/:table/:id', (req, res, next)=>{
         res.status(404).send("No tables with that name")
     }
 })
+// get all tasks for a category 
+app.get('/tasks/:category', (req, res, next)=>{
+    const category = req.params.category
+    // pool query to categories table to get id of param category
+})
 
-
+// post new task 
+app.post('/tasks', (req, res, next)=>{
+    const categoryId = Number.parseInt(req.body.id)
+    const { name, dateAdded, dateDue, completed  } = req.body
+    if(name && dateAdded && dateDue && categoryId && completed){
+        pool.query(`INSERT INTO tasks
+            (name, date_added, date_due, category_id, completed)
+            VALUES 
+            ($1, $2, $3, $4, $5),`, [name], [dateAdded], [dateDue], [categoryId], [completed], 
+            (err, result)=>{
+                if(err){
+                 return next(err)
+                }
+                const task = result.rows[0]
+                if(task){
+                    return res.send(pet)
+                } else{
+                    return next(err)
+                }
+        })
+    } else {
+        return res.status(400).send("Unable to create pet from request body")
+    }
+            
+})
 
 app.listen(port, ()=>{
     console.log("listening on port ", port)
