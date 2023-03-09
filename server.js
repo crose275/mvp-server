@@ -6,7 +6,11 @@ const port = process.env.PORT || 8001;
 
 const bodyParser = require('body-parser');
 app.use(bodyParser.json());
-app.use(cors());
+// app.use(cors());
+var corsOptions = {
+    origin: 'https://todolist-ro6n.onrender.com/',
+    optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+  }
 
 const dbConn = require('./dbConn');
 const pool = dbConn.getPool();
@@ -83,7 +87,7 @@ app.get('/tasks/:category', (req, res, next)=>{
 })
 
 // post new task 
-app.post('/tasks', cors(), (req, res, next)=>{
+app.post('/tasks', cors(corsOptions), (req, res, next)=>{
     console.log(req.body)
     const categoryId = Number.parseInt(req.body.category_id)
     console.log(categoryId)
