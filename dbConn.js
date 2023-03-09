@@ -13,7 +13,7 @@ function getPool() {
        host: POSTGRES_HOST,
        database: POSTGRES_DB,
        password: POSTGRES_PASSWORD,
-       port: 5432, 
+    //    port: 5432, 
     };
 
 
