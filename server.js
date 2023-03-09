@@ -83,7 +83,7 @@ app.get('/tasks/:category', (req, res, next)=>{
 })
 
 // post new task 
-app.post('/tasks', (req, res, next)=>{
+app.post('/tasks', cors(), (req, res, next)=>{
     console.log(req.body)
     const categoryId = Number.parseInt(req.body.category_id)
     console.log(categoryId)
