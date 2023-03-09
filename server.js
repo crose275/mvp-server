@@ -104,6 +104,7 @@ app.post('/tasks', cors(), (req, res, next)=>{
                 const task = data.rows[0]
                 
                 if(task){
+                    res.setHeader('Access-Control-Allow-Origin', '*')
                     return res.send(task)
                 } 
                 else{
