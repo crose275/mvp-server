@@ -76,7 +76,7 @@ app.get('/tasks/:category', (req, res, next)=>{
 
 // post new task 
 app.post('/tasks', (req, res, next)=>{
-    const categoryId = Number.parseInt(req.body.id)
+    const categoryId = Number.parseInt(req.body.category_id)
     const name = req.body.name 
     const dateAdded = req.body.date_added
     const dateDue = req.body.date_due
@@ -98,7 +98,7 @@ app.post('/tasks', (req, res, next)=>{
                 }
         })
     } else {
-        return res.status(400).send("Unable to create pet from request body", err)
+        return res.status(400).send("Unable to create pet from request body")
     }
             
 })
