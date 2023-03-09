@@ -104,7 +104,7 @@ app.post('/tasks', cors(), (req, res, next)=>{
                 const task = data.rows[0]
                 
                 if(task){
-                    res.setHeader('Access-Control-Allow-Origin', '*')
+                    res.setHeader('Access-Control-Allow-Origin', 'https://todolist-ro6n.onrender.com/')
                     return res.send(task)
                 } 
                 else{
