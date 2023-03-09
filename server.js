@@ -77,8 +77,11 @@ app.get('/tasks/:category', (req, res, next)=>{
 // post new task 
 app.post('/tasks', (req, res, next)=>{
     const categoryId = Number.parseInt(req.body.id)
-    const { name, dateAdded, dateDue, completed  } = req.body
-    if(name && dateAdded && dateDue && categoryId && completed){
+    const name = req.body.name 
+    const dateAdded = req.body.date_added
+    const dateDue = req.body.date_due
+    const completed =  req.body.completed
+    if(name && dateAdded && dateDue && categoryId && completed && !Number.isNaN(id)){
         pool.query(`INSERT INTO tasks
             (name, date_added, date_due, category_id, completed)
             VALUES 
@@ -95,7 +98,7 @@ app.post('/tasks', (req, res, next)=>{
                 }
         })
     } else {
-        return res.status(400).send("Unable to create pet from request body")
+        return res.status(400).send("Unable to create pet from request body", err)
     }
             
 })
